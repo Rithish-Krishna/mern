@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const healthRoutes = require("./routes/healthRoutes");
 
 const port = 3000;
 app.use(express.json())
@@ -7,9 +8,7 @@ app.get("/",(req,res)=>{
     res.send("HEllO");
 })
 
-app.get("/health",(req,res)=>{
-    res.send(true)
-})
+app.use(healthRoutes);
 
 app.post("/api",(req,res)=>{
     const task = req.body;
