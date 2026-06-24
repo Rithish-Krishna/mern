@@ -5,19 +5,10 @@ const paraRouter = require("./Routes/pararoute");
 
 const port = 3000;
 app.use(express.json())
+
+
 app.get("/",(req,res)=>{
     res.send("HEllO");
-})
-
-app.use(healthRoutes);
-
-app.post("/api",(req,res)=>{
-    const task = req.body;
-
-    res.json({
-        message:"task created",
-        task:task
-    });
 })
 
 //Route parameters
@@ -26,6 +17,9 @@ app.post("/api",(req,res)=>{
 //     res.send(`User Id ${req.params.userId} Book Id:${req.params.bookId}`);
 // }
 // );
+
+app.use("/health",healthRoutes);
+app.use("/health",healthRoutes);
 app.use(paraRouter);
 //Query parameters
 
