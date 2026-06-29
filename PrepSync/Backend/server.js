@@ -1,11 +1,17 @@
 const express = require("express");
+require("dotenv").config();
+
+const user = require("./Models/user");
+const connectDb = require("./config/db")
 const app = express();
+const userroute = require("./Routes/Userroute");
 const healthRoutes = require("./Routes/healthroute");
 const paraRouter = require("./Routes/pararoute");
 
-const port = 3000;
+const port = process.env.PORT;
 app.use(express.json())
 
+connectDb();
 
 app.get("/",(req,res)=>{
     res.send("HEllO");
@@ -18,12 +24,22 @@ app.get("/",(req,res)=>{
 // }
 // );
 
+
+
 app.use("/health",healthRoutes);
 app.use("/health",healthRoutes);
 app.use(paraRouter);
 //Query parameters
+app.use("/user",userroute);
 
+// app.post("/user", async (req,res)=>{
+//     const data = req.data;
 
+//     const user = new  user(data);
+//     await user.save();
+
+//     res.send("Created successully");
+// });
 
 app.all("/*splat",(req,res)=>{
     res.send("Error 404 page not found");
