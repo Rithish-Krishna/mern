@@ -7,11 +7,13 @@ const app = express();
 const userroute = require("./Routes/Userroute");
 const healthRoutes = require("./Routes/healthroute");
 const paraRouter = require("./Routes/pararoute");
-
 const port = process.env.PORT;
-app.use(express.json())
+
 
 connectDb();
+app.use(express.json())
+
+
 
 app.get("/",(req,res)=>{
     res.send("HEllO");

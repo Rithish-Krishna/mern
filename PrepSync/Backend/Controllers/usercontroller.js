@@ -1,12 +1,37 @@
 const User = require("../Models/user");
 
-const postuser = async (req,res)=>{
-    const data = req.data;
+const registerUser = async (req,res)=>{
+    const {name, email, password} = req.body;
+    console.log(data)
+    if(!name||!email||!password){
+        res.status(400).json({
+            message:"Please fill All the details"
+        })
+    }
 
-    const user = new  User(data);
+    const exsistingUser = User.findOne({
+        email
+    });
+
+    if(exsistingUser){
+        res.status(400).json({
+            message:"Already LoggedIn"
+        });
+    }
+
+    const user = new  User({
+        name,
+        email,
+        password
+    });
+
     await user.save();
 
-    res.send("Created successully");
+    res.status(200).json({
+        message:"Successfully Created the User"
+    })
 }
 
-module.exports = postuser;
+module.exports = {
+    registerUser
+};
