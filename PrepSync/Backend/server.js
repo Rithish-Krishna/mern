@@ -11,13 +11,12 @@ const port = process.env.PORT;
 
 
 connectDb();
-app.use(express.json())
-
+app.use(express.json());
 
 
 app.get("/",(req,res)=>{
     res.send("HEllO");
-})
+});
 
 //Route parameters
 // app.get("/user/:userId/books/:bookId", (req,res)=>
@@ -26,13 +25,12 @@ app.get("/",(req,res)=>{
 // }
 // );
 
-
-
 app.use("/health",healthRoutes);
 app.use("/health",healthRoutes);
 app.use(paraRouter);
 //Query parameters
-app.use("/user",userroute);
+
+app.use("/api",userroute);
 
 // app.post("/user", async (req,res)=>{
 //     const data = req.data;
@@ -45,9 +43,8 @@ app.use("/user",userroute);
 
 app.all("/*splat",(req,res)=>{
     res.send("Error 404 page not found");
-})
+});
 
 app.listen(port,()=>{
     console.log("hello");
-})
-
+});
